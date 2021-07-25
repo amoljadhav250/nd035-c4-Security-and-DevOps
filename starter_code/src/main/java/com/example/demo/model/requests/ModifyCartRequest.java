@@ -36,7 +36,13 @@ public class ModifyCartRequest {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
 
+	public ModifyCartRequest(String username, long itemId, int quantity) {
+		this.username = username;
+		this.itemId = itemId;
+		this.quantity = quantity;
+	}
+
+	public ModifyCartRequest() {
+	}
 }

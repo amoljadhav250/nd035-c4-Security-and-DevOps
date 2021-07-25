@@ -39,6 +39,8 @@ public class UserController {
 	
 	@GetMapping("/{username}")
 	public ResponseEntity<User> findByUserName(@PathVariable String username) {
+		System.out.println("username input is:-"+username);
+		System.out.println("userRepository.findAll():-"+userRepository.findAll());
 		User user = userRepository.findByUsername(username);
 		return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);
 	}
