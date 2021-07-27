@@ -104,4 +104,13 @@ public class Cart {
 				", total=" + total +
 				'}';
 	}
+
+	public Cart(Long id, List<Item> items, User user) {
+		this.id = id;
+		this.items = items;
+		this.user = user;
+	}
+
+	public Cart() {
+	}
 }
