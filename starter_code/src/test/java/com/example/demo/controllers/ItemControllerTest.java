@@ -37,7 +37,7 @@ public class ItemControllerTest {
 
     @Test
     public void getItemByIdHappyPath() {
-        Item newItem = createItem(1L, "Fidget Spinner", "Toy", new BigDecimal("5"));
+        Item newItem = new Item(1L, "Doll", BigDecimal.valueOf(5),"It is a toy");
         when(itemRepository.findById(newItem.getId())).thenReturn(Optional.of(newItem));
 
         ResponseEntity<Item> response = itemController.getItemById(1L);
@@ -48,30 +48,22 @@ public class ItemControllerTest {
         Item itemFound = response.getBody();
         assertNotNull(itemFound);
         assertEquals(Long.valueOf(1L), itemFound.getId());
-        assertEquals("Fidget Spinner", itemFound.getName());
-        assertEquals("Toy", itemFound.getDescription());
+        assertEquals("Doll", itemFound.getName());
+        assertEquals("It is a toy", itemFound.getDescription());
         assertEquals(BigDecimal.valueOf(5), itemFound.getPrice());
     }
 
-    private Item createItem(long l, String fidget_spinner, String toy, BigDecimal bigDecimal) {
-        Item newItem = new Item();
-        newItem.setId(l);
-        newItem.setName(fidget_spinner);
-        newItem.setDescription(toy);
-        newItem.setPrice(bigDecimal);
-        return newItem;
-    }
 
     @Test
     public void getItemByNameHappyPath() {
-        Item item1 = createItem(1L, "Fidget Spinner", "Metal Toy", new BigDecimal("5"));
-        Item item2 = createItem(1L, "Fidget Spinner", "Plastic Toy", new BigDecimal("5"));
+        Item item1 = new Item(1L, "Dog Toy",BigDecimal.valueOf(5), "Metal Toy");
+        Item item2 = new Item(1L, "Dog Toy", BigDecimal.valueOf(5),"Plastic Toy");
         List<Item> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
-        when(itemRepository.findByName("Fidget Spinner")).thenReturn(items);
+        when(itemRepository.findByName("Dog Toy")).thenReturn(items);
 
-        ResponseEntity<List<Item>> response = itemController.getItemsByName("Fidget Spinner");
+        ResponseEntity<List<Item>> response = itemController.getItemsByName("Dog Toy");
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
@@ -79,7 +71,7 @@ public class ItemControllerTest {
         List<Item> itemsFound = response.getBody();
         assertNotNull(itemsFound);
         assertEquals(Long.valueOf(1L), itemsFound.get(0).getId());
-        assertEquals("Fidget Spinner", itemsFound.get(0).getName());
+        assertEquals("Dog Toy", itemsFound.get(0).getName());
         assertEquals("Metal Toy", itemsFound.get(0).getDescription());
         assertEquals(BigDecimal.valueOf(5), itemsFound.get(0).getPrice());
     }

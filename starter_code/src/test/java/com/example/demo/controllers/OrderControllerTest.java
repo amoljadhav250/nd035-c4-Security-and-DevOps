@@ -7,15 +7,14 @@ import com.example.demo.model.persistence.User;
 import com.example.demo.model.persistence.UserOrder;
 import com.example.demo.model.persistence.repositories.OrderRepository;
 import com.example.demo.model.persistence.repositories.UserRepository;
-import com.example.demo.model.requests.ModifyCartRequest;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -87,6 +86,18 @@ public class OrderControllerTest {
         assertNotNull(userOrder);
     }
 
+    @Test
+    public void submitOrderNullUserSadPath(){
+        when(userRepository.findByUsername("Amol")).thenReturn(null);
+        ResponseEntity<UserOrder> response = orderController.submit("Joan");
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 
+    @Test
+    public void getOrderNullUserSadPath(){
+        when(userRepository.findByUsername("Amol")).thenReturn(null);
+        ResponseEntity<List<UserOrder>> response = orderController.getOrdersForUser("Joan");
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 
 }
