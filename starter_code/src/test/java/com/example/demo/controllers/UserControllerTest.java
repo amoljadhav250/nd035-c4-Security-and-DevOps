@@ -125,4 +125,29 @@ public class UserControllerTest {
         assertEquals("thisIsHashed",user2.getPassword());
 
     }
+
+    @Test
+    public void createUserSadPath(){
+        when(encoder.encode("amol1234")).thenReturn("thisIsHashed");
+        CreateUserRequest createUserRequest = new CreateUserRequest("Amol","amol1234","amol12344");
+        ResponseEntity<User> response = userController.createUser(createUserRequest);
+
+        assertNotNull(response);
+        assertEquals(400,response.getStatusCodeValue());
+
+        User user=response.getBody();
+        assertNull(user);
+    }
+
+    @Test
+    public void findByIdSadPath(){
+        ResponseEntity<User> response = userController.findById(1L);
+        assertEquals(404, response.getStatusCodeValue());
+    }
+
+    @Test
+    public void findByUserNameSadPath(){
+        ResponseEntity<User> response = userController.findByUserName("Amol");
+        assertEquals(404, response.getStatusCodeValue());
+    }
 }

@@ -37,7 +37,7 @@ public class ItemControllerTest {
 
     @Test
     public void getItemByIdHappyPath() {
-        Item newItem = createItem(1L, "Fidget Spinner", "Toy", new BigDecimal("5"));
+        Item newItem = new Item(1L, "Doll", BigDecimal.valueOf(5),"It is a toy");
         when(itemRepository.findById(newItem.getId())).thenReturn(Optional.of(newItem));
 
         ResponseEntity<Item> response = itemController.getItemById(1L);
@@ -53,19 +53,11 @@ public class ItemControllerTest {
         assertEquals(BigDecimal.valueOf(5), itemFound.getPrice());
     }
 
-    private Item createItem(long l, String fidget_spinner, String toy, BigDecimal bigDecimal) {
-        Item newItem = new Item();
-        newItem.setId(l);
-        newItem.setName(fidget_spinner);
-        newItem.setDescription(toy);
-        newItem.setPrice(bigDecimal);
-        return newItem;
-    }
 
     @Test
     public void getItemByNameHappyPath() {
-        Item item1 = createItem(1L, "Fidget Spinner", "Metal Toy", new BigDecimal("5"));
-        Item item2 = createItem(1L, "Fidget Spinner", "Plastic Toy", new BigDecimal("5"));
+        Item item1 = new Item(1L, "Fidget Spinner",BigDecimal.valueOf(5), "Metal Toy");
+        Item item2 = new Item(1L, "Fidget Spinner", BigDecimal.valueOf(5),"Plastic Toy");
         List<Item> items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
