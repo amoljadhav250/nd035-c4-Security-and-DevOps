@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -41,11 +42,20 @@ public class UserController {
 		return ResponseEntity.of(userRepository.findById(id));
 	}
 	
-	@GetMapping("/{username}")
+	@GetMapping("/name/{username}")
 	public ResponseEntity<User> findByUserName(@PathVariable String username) {
 		System.out.println("username input is:-"+username);
 		System.out.println("userRepository.findAll():-"+userRepository.findAll());
 		User user = userRepository.findByUsername(username);
+
+		/*List<User> users = userRepository.findAll();
+		User user = null;
+		for(User u:users){
+			if(u.getUsername().equals(username)){
+				user=u;
+			}
+		}*/
+
 
 		if (user == null) {
 			log.info("User does not exist");
