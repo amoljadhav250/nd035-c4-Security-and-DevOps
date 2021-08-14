@@ -41,11 +41,13 @@ public class OrderController {
 		}
 		UserOrder order = UserOrder.createFromCart(user.getCart());
 		orderRepository.save(order);
+		log.info("Order submitted successfully");
 		return ResponseEntity.ok(order);
 	}
 	
 	@GetMapping("/history/{username}")
 	public ResponseEntity<List<UserOrder>> getOrdersForUser(@PathVariable String username) {
+		log.info("Fetching order history for user "+username);
 		User user = userRepository.findByUsername(username);
 		if(user == null) {
 			log.info("User does not exist");
