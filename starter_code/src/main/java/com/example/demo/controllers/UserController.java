@@ -80,6 +80,7 @@ public class UserController {
 		if(createUserRequest.getPassword().length() < 7 || !createUserRequest.getPassword().equals(createUserRequest
 		.getConfirmPassword())){
 			log.info("User password is not proper");
+			log.info("User creation failed");
 			return ResponseEntity.badRequest().build();
 		}
 		user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword()));
