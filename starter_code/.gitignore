@@ -1,7 +1,5 @@
-/target/
 .DS_Store
 # General
-.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -26,3 +24,31 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+HELP.md
+
+### STS ###
+
+.apt_generated
+
+.classpath
+
+.factorypath
+
+.project
+
+.settings
+
+.springBeans
+
+.sts4-cache
+
+### IntelliJ IDEA ###
+
+.idea
+
+*.iws
+
+*.iml
+
+*.ipr
